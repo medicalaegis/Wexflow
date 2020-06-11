@@ -10,12 +10,12 @@ namespace Wexflow.Tasks.MailsSender
 {
     public class Mail
     {
-        public string From { get; }
+        public string From { get; set; }
         public string[] To { get; }
         public string[] Cc { get; }
         public string[] Bcc { get; }
-        public string Subject { get; set; }
-        public string Body { get; set; }
+        public string Subject { get; }
+        public string Body { get; }
         public FileInf[] Attachments { get; }
 
         public Mail(string from, string[] to, string[] cc, string[] bcc, string subject, string body, FileInf[] attachments)
@@ -68,21 +68,21 @@ namespace Wexflow.Tasks.MailsSender
             }
         }
 
-        public static Mail Parse(XElement xe, FileInf[] attachments)
+        public static Mail Parse(MailsSender mailsSender, XElement xe, FileInf[] attachments)
         {
-            string from = xe.XPathSelectElement("From").Value;
-            var to = xe.XPathSelectElement("To").Value.Split(',');
+            string from = mailsSender.ParseVariables(xe.XPathSelectElement("From").Value);
+            var to = mailsSender.ParseVariables(xe.XPathSelectElement("To").Value).Split(',');
 
             string[] cc = { };
             var ccElement = xe.XPathSelectElement("Cc");
-            if (ccElement != null) cc = ccElement.Value.Split(',');
+            if (ccElement != null) cc = mailsSender.ParseVariables(ccElement.Value).Split(',');
 
             string[] bcc = { };
             var bccElement = xe.XPathSelectElement("Bcc");
-            if (bccElement != null) bcc = bccElement.Value.Split(',');
+            if (bccElement != null) bcc = mailsSender.ParseVariables(bccElement.Value).Split(',');
 
-            string subject = xe.XPathSelectElement("Subject").Value;
-            string body = xe.XPathSelectElement("Body").Value;
+            string subject = mailsSender.ParseVariables(xe.XPathSelectElement("Subject").Value);
+            string body = mailsSender.ParseVariables(xe.XPathSelectElement("Body").Value);
 
             return new Mail(from, to, cc, bcc, subject, body, attachments);
         }

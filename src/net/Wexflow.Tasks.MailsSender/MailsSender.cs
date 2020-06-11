@@ -101,9 +101,7 @@ namespace Wexflow.Tasks.MailsSender
                         Mail mail;
                         try
                         {
-                            mail = Mail.Parse(xMail, attachments);
-                            mail.Subject = ParseVariables(mail.Subject);
-                            mail.Body = ParseVariables(mail.Body);
+                            mail = Mail.Parse(this, xMail, attachments);
                         }
                         catch (ThreadAbortException)
                         {
@@ -149,7 +147,7 @@ namespace Wexflow.Tasks.MailsSender
             return success;
         }
 
-        private string ParseVariables(string src)
+        public string ParseVariables(string src)
         {
             //
             // Parse local variables.
