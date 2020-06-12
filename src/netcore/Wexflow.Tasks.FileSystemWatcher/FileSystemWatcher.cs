@@ -93,7 +93,7 @@ namespace Wexflow.Tasks.FileSystemWatcher
                     }
                     catch (Exception ex)
                     {
-                        ErrorFormat("An error while updating FileSystemWatcher.OnCreated database entry.", ex);
+                        ErrorFormat("An error while updating FileSystemWatcher.OnFound database entry.", ex);
                     }
                 }
                 Info("Checking existing files finished.");
