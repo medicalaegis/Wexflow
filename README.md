@@ -1,5 +1,6 @@
+<!--
 ![Logo](https://aelassas.github.io/wexflow/images/wd-logo-4.jpg)
-
+-->
 [![Build Status](https://aelassas.visualstudio.com/Wexflow/_apis/build/status/aelassas.Wexflow?branchName=master)](https://aelassas.visualstudio.com/Wexflow/_build/latest?definitionId=1&branchName=master)
 [![Downloads](https://img.shields.io/github/downloads/aelassas/Wexflow/total.svg)](https://wexflow.github.io/stats)
 [![Nuget](https://img.shields.io/nuget/v/Wexflow)](https://www.nuget.org/packages/Wexflow)
@@ -28,6 +29,7 @@ Wexflow provides [100+ activities](https://github.com/aelassas/Wexflow/wiki/Task
 - [Real-time stats](https://github.com/aelassas/Wexflow/wiki/Usage#dashboard)
 - [RESTful API](https://github.com/aelassas/Wexflow/wiki/RESTful-API)
 - [Extensible](https://github.com/aelassas/Wexflow/wiki/Extensible)
+- [And much more...](https://github.com/aelassas/Wexflow/wiki)
 
 ## Download
 
