@@ -54,10 +54,10 @@ namespace Wexflow.Tasks.FileSystemWatcher
                     InfoFormat("FileSystemWatcher.OnFound started for {0}", file);
                     try
                     {
-                        if (SafeMode && FileChange.IsFileLocked(file))
+                        if (SafeMode && WexflowEngine.IsFileLocked(file))
                         {
                             Info($"File lock detected on file {file}");
-                            while (FileChange.IsFileLocked(file))
+                            while (WexflowEngine.IsFileLocked(file))
                             {
                                 Thread.Sleep(1000);
                             }
@@ -144,10 +144,10 @@ namespace Wexflow.Tasks.FileSystemWatcher
                         Info("PollingFileSystemWatcher.OnCreated started.");
                         try
                         {
-                            if (SafeMode && FileChange.IsFileLocked(path))
+                            if (SafeMode && WexflowEngine.IsFileLocked(path))
                             {
                                 Info($"File lock detected on file {path}");
-                                while (FileChange.IsFileLocked(path))
+                                while (WexflowEngine.IsFileLocked(path))
                                 {
                                     Thread.Sleep(1000);
                                 }
@@ -188,10 +188,10 @@ namespace Wexflow.Tasks.FileSystemWatcher
                         Info("PollingFileSystemWatcher.OnChanged started.");
                         try
                         {
-                            if (SafeMode && FileChange.IsFileLocked(path))
+                            if (SafeMode && WexflowEngine.IsFileLocked(path))
                             {
                                 Info($"File lock detected on file {path}");
-                                while (FileChange.IsFileLocked(path))
+                                while (WexflowEngine.IsFileLocked(path))
                                 {
                                     Thread.Sleep(1000);
                                 }

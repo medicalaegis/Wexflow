@@ -134,6 +134,14 @@ namespace Wexflow.Server
                 switch (change.ChangeType)
                 {
                     case WatcherChangeTypes.Created:
+                        if (WexflowEngine.IsFileLocked(path))
+                        {
+                            Logger.Info($"File lock detected on file {path}");
+                            while (WexflowEngine.IsFileLocked(path))
+                            {
+                                Thread.Sleep(1000);
+                            }
+                        }
                         Logger.Info("Workflow.PollingFileSystemWatcher.OnCreated");
                         try
                         {
@@ -146,6 +154,14 @@ namespace Wexflow.Server
                         }
                         break;
                     case WatcherChangeTypes.Changed:
+                        if (WexflowEngine.IsFileLocked(path))
+                        {
+                            Logger.Info($"File lock detected on file {path}");
+                            while (WexflowEngine.IsFileLocked(path))
+                            {
+                                Thread.Sleep(1000);
+                            }
+                        }
                         Logger.Info("Workflow.PollingFileSystemWatcher.OnChanged");
                         try
                         {
@@ -198,6 +214,14 @@ namespace Wexflow.Server
                 var path = Path.Combine(change.Directory, change.Name);
                 if (change.ChangeType == WatcherChangeTypes.Created)
                 {
+                    if (WexflowEngine.IsFileLocked(path))
+                    {
+                        Logger.Info($"File lock detected on file {path}");
+                        while (WexflowEngine.IsFileLocked(path))
+                        {
+                            Thread.Sleep(1000);
+                        }
+                    }
                     Logger.Info("Record.PollingFileSystemWatcher.OnCreated");
                     try
                     {

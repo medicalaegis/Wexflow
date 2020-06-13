@@ -139,6 +139,15 @@ namespace Wexflow.Server
 
         private static void OnWorkflowCreated(object source, FileSystemEventArgs e)
         {
+            if (WexflowEngine.IsFileLocked(e.FullPath))
+            {
+                Logger.Info($"File lock detected on file {e.FullPath}");
+
+                while (WexflowEngine.IsFileLocked(e.FullPath))
+                {
+                    Thread.Sleep(1000);
+                }
+            }
             if (!WexflowEngine.IsDirectory(e.FullPath))
             {
                 Logger.Info("Workflow.FileSystemWatcher.OnCreated");
@@ -156,6 +165,15 @@ namespace Wexflow.Server
 
         private static void OnWorkflowChanged(object source, FileSystemEventArgs e)
         {
+            if (WexflowEngine.IsFileLocked(e.FullPath))
+            {
+                Logger.Info($"File lock detected on file {e.FullPath}");
+
+                while (WexflowEngine.IsFileLocked(e.FullPath))
+                {
+                    Thread.Sleep(1000);
+                }
+            }
             if (!WexflowEngine.IsDirectory(e.FullPath))
             {
                 Logger.Info("Workflow.FileSystemWatcher.OnChanged");
@@ -212,6 +230,15 @@ namespace Wexflow.Server
 
         private static void OnRecordCreated(object source, FileSystemEventArgs e)
         {
+            if (WexflowEngine.IsFileLocked(e.FullPath))
+            {
+                Logger.Info($"File lock detected on file {e.FullPath}");
+
+                while (WexflowEngine.IsFileLocked(e.FullPath))
+                {
+                    Thread.Sleep(1000);
+                }
+            }
             if (!WexflowEngine.IsDirectory(e.FullPath))
             {
                 Logger.Info("Record.FileSystemWatcher.OnCreated");

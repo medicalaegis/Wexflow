@@ -96,34 +96,6 @@ namespace Wexflow.Tasks.FileSystemWatcher
             return new TaskStatus(Status.Success);
         }
 
-        private static bool IsFileLocked(string filePath)
-        {
-            FileStream stream = null;
-
-            try
-            {
-                stream = File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.None);
-            }
-            catch (IOException)
-            {
-                //the file is unavailable because it is:
-                //still being written to
-                //or being processed by another thread
-                //or does not exist (has already been processed)
-                return true;
-            }
-            finally
-            {
-                if (stream != null)
-                {
-                    stream.Close();
-                }
-            }
-
-            //file is not locked
-            return false;
-        }
-
         private void InitFileSystemWatcher()
         {
             Info("Checking existing files...");
@@ -134,10 +106,10 @@ namespace Wexflow.Tasks.FileSystemWatcher
                 InfoFormat("FileSystemWatcher.OnFound started for {0}", file);
                 try
                 {
-                    if (SafeMode && IsFileLocked(file))
+                    if (SafeMode && WexflowEngine.IsFileLocked(file))
                     {
                         Info($"File lock detected on file {file}");
-                        while (IsFileLocked(file))
+                        while (WexflowEngine.IsFileLocked(file))
                         {
                             Thread.Sleep(1000);
                         }
@@ -213,11 +185,11 @@ namespace Wexflow.Tasks.FileSystemWatcher
                 if (File.Exists(e.FullPath) && !IsDirectory(e.FullPath))
                 {
                     Info("FileSystemWatcher.OnCreated started.");
-                    if (SafeMode && IsFileLocked(e.FullPath))
+                    if (SafeMode && WexflowEngine.IsFileLocked(e.FullPath))
                     {
                         Info($"File lock detected on file {e.FullPath}");
 
-                        while (IsFileLocked(e.FullPath))
+                        while (WexflowEngine.IsFileLocked(e.FullPath))
                         {
                             Thread.Sleep(1000);
                         }
@@ -276,11 +248,11 @@ namespace Wexflow.Tasks.FileSystemWatcher
                 if (File.Exists(e.FullPath) && !IsDirectory(e.FullPath))
                 {
                     Info("FileSystemWatcher.OnChanged started.");
-                    if (SafeMode && IsFileLocked(e.FullPath))
+                    if (SafeMode && WexflowEngine.IsFileLocked(e.FullPath))
                     {
                         Info($"File lock detected on file {e.FullPath}");
 
-                        while (IsFileLocked(e.FullPath))
+                        while (WexflowEngine.IsFileLocked(e.FullPath))
                         {
                             Thread.Sleep(1000);
                         }

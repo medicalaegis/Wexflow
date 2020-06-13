@@ -1916,5 +1916,38 @@ namespace Wexflow.Core
         {
             return Database.GetApprovers(recordId).ToArray();
         }
+
+        /// <summary>
+        /// Checks whether a file is locked or no.
+        /// </summary>
+        /// <param name="filePath">File path.</param>
+        /// <returns>Result.</returns>
+        public static bool IsFileLocked(string filePath)
+        {
+            FileStream stream = null;
+
+            try
+            {
+                stream = File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.None);
+            }
+            catch (IOException)
+            {
+                //the file is unavailable because it is:
+                //still being written to
+                //or being processed by another thread
+                //or does not exist (has already been processed)
+                return true;
+            }
+            finally
+            {
+                if (stream != null)
+                {
+                    stream.Close();
+                }
+            }
+
+            //file is not locked
+            return false;
+        }
     }
 }
