@@ -139,54 +139,58 @@ namespace Wexflow.Server
 
         private static void OnWorkflowCreated(object source, FileSystemEventArgs e)
         {
-            if (WexflowEngine.IsFileLocked(e.FullPath))
+            try
             {
-                Logger.Info($"File lock detected on file {e.FullPath}");
+                if (WexflowEngine.IsFileLocked(e.FullPath))
+                {
+                    Logger.Info($"File lock detected on file {e.FullPath}");
 
-                while (WexflowEngine.IsFileLocked(e.FullPath))
-                {
-                    Thread.Sleep(1000);
+                    while (WexflowEngine.IsFileLocked(e.FullPath))
+                    {
+                        Thread.Sleep(1000);
+                    }
                 }
-            }
-            if (!WexflowEngine.IsDirectory(e.FullPath))
-            {
-                Logger.Info("Workflow.FileSystemWatcher.OnCreated");
-                try
+                if (!WexflowEngine.IsDirectory(e.FullPath))
                 {
+                    Logger.Info("Workflow.FileSystemWatcher.OnCreated");
+
                     var admin = WexflowEngine.GetUser(superAdminUsername);
                     WexflowEngine.SaveWorkflowFromFile(admin.GetDbId(), Core.Db.UserProfile.SuperAdministrator, e.FullPath, true);
+
                 }
-                catch (Exception ex)
-                {
-                    Logger.ErrorFormat("Error while creating the workflow {0}", ex, e.FullPath);
-                }
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorFormat("Error while creating the workflow {0}", ex, e.FullPath);
             }
         }
 
         private static void OnWorkflowChanged(object source, FileSystemEventArgs e)
         {
-            if (WexflowEngine.IsFileLocked(e.FullPath))
+            try
             {
-                Logger.Info($"File lock detected on file {e.FullPath}");
+                if (WexflowEngine.IsFileLocked(e.FullPath))
+                {
+                    Logger.Info($"File lock detected on file {e.FullPath}");
 
-                while (WexflowEngine.IsFileLocked(e.FullPath))
-                {
-                    Thread.Sleep(1000);
+                    while (WexflowEngine.IsFileLocked(e.FullPath))
+                    {
+                        Thread.Sleep(1000);
+                    }
                 }
-            }
-            if (!WexflowEngine.IsDirectory(e.FullPath))
-            {
-                Logger.Info("Workflow.FileSystemWatcher.OnChanged");
-                try
+                if (!WexflowEngine.IsDirectory(e.FullPath))
                 {
+                    Logger.Info("Workflow.FileSystemWatcher.OnChanged");
+
                     Thread.Sleep(500);
                     var admin = WexflowEngine.GetUser(superAdminUsername);
                     WexflowEngine.SaveWorkflowFromFile(admin.GetDbId(), Core.Db.UserProfile.SuperAdministrator, e.FullPath, true);
+
                 }
-                catch (Exception ex)
-                {
-                    Logger.ErrorFormat("Error while updating the workflow {0}", ex, e.FullPath);
-                }
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorFormat("Error while updating the workflow {0}", ex, e.FullPath);
             }
         }
 
@@ -230,20 +234,21 @@ namespace Wexflow.Server
 
         private static void OnRecordCreated(object source, FileSystemEventArgs e)
         {
-            if (WexflowEngine.IsFileLocked(e.FullPath))
+            try
             {
-                Logger.Info($"File lock detected on file {e.FullPath}");
+                if (WexflowEngine.IsFileLocked(e.FullPath))
+                {
+                    Logger.Info($"File lock detected on file {e.FullPath}");
 
-                while (WexflowEngine.IsFileLocked(e.FullPath))
-                {
-                    Thread.Sleep(1000);
+                    while (WexflowEngine.IsFileLocked(e.FullPath))
+                    {
+                        Thread.Sleep(1000);
+                    }
                 }
-            }
-            if (!WexflowEngine.IsDirectory(e.FullPath))
-            {
-                Logger.Info("Record.FileSystemWatcher.OnCreated");
-                try
+                if (!WexflowEngine.IsDirectory(e.FullPath))
                 {
+                    Logger.Info("Record.FileSystemWatcher.OnCreated");
+
                     Thread.Sleep(1000);
                     var recordId = WexflowEngine.SaveRecordFromFile(e.FullPath, superAdminUsername);
                     if (recordId != "-1")
@@ -254,15 +259,16 @@ namespace Wexflow.Server
                     {
                         Logger.Error($"An error occured while inserting a record from the file {e.FullPath}.");
                     }
+
                 }
-                catch (IOException ex) when ((ex.HResult & 0x0000FFFF) == 32)
-                {
-                    Logger.InfoFormat("There is a sharing violation for the file {0}.", e.FullPath);
-                }
-                catch (Exception ex)
-                {
-                    Logger.ErrorFormat("Error while creating the record {0}", ex, e.FullPath);
-                }
+            }
+            catch (IOException ex) when ((ex.HResult & 0x0000FFFF) == 32)
+            {
+                Logger.InfoFormat("There is a sharing violation for the file {0}.", e.FullPath);
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorFormat("Error while creating the record {0}", ex, e.FullPath);
             }
         }
 

@@ -134,17 +134,18 @@ namespace Wexflow.Server
                 switch (change.ChangeType)
                 {
                     case WatcherChangeTypes.Created:
-                        if (WexflowEngine.IsFileLocked(path))
-                        {
-                            Logger.Info($"File lock detected on file {path}");
-                            while (WexflowEngine.IsFileLocked(path))
-                            {
-                                Thread.Sleep(1000);
-                            }
-                        }
-                        Logger.Info("Workflow.PollingFileSystemWatcher.OnCreated");
                         try
                         {
+                            if (WexflowEngine.IsFileLocked(path))
+                            {
+                                Logger.Info($"File lock detected on file {path}");
+                                while (WexflowEngine.IsFileLocked(path))
+                                {
+                                    Thread.Sleep(1000);
+                                }
+                            }
+                            Logger.Info("Workflow.PollingFileSystemWatcher.OnCreated");
+
                             var admin = WexflowEngine.GetUser(superAdminUsername);
                             WexflowEngine.SaveWorkflowFromFile(admin.GetDbId(), Core.Db.UserProfile.SuperAdministrator, path, true);
                         }
@@ -154,17 +155,18 @@ namespace Wexflow.Server
                         }
                         break;
                     case WatcherChangeTypes.Changed:
-                        if (WexflowEngine.IsFileLocked(path))
-                        {
-                            Logger.Info($"File lock detected on file {path}");
-                            while (WexflowEngine.IsFileLocked(path))
-                            {
-                                Thread.Sleep(1000);
-                            }
-                        }
-                        Logger.Info("Workflow.PollingFileSystemWatcher.OnChanged");
                         try
                         {
+                            if (WexflowEngine.IsFileLocked(path))
+                            {
+                                Logger.Info($"File lock detected on file {path}");
+                                while (WexflowEngine.IsFileLocked(path))
+                                {
+                                    Thread.Sleep(1000);
+                                }
+                            }
+                            Logger.Info("Workflow.PollingFileSystemWatcher.OnChanged");
+
                             var admin = WexflowEngine.GetUser(superAdminUsername);
                             WexflowEngine.SaveWorkflowFromFile(admin.GetDbId(), Core.Db.UserProfile.SuperAdministrator, path, true);
                         }
@@ -214,17 +216,18 @@ namespace Wexflow.Server
                 var path = Path.Combine(change.Directory, change.Name);
                 if (change.ChangeType == WatcherChangeTypes.Created)
                 {
-                    if (WexflowEngine.IsFileLocked(path))
-                    {
-                        Logger.Info($"File lock detected on file {path}");
-                        while (WexflowEngine.IsFileLocked(path))
-                        {
-                            Thread.Sleep(1000);
-                        }
-                    }
-                    Logger.Info("Record.PollingFileSystemWatcher.OnCreated");
                     try
                     {
+                        if (WexflowEngine.IsFileLocked(path))
+                        {
+                            Logger.Info($"File lock detected on file {path}");
+                            while (WexflowEngine.IsFileLocked(path))
+                            {
+                                Thread.Sleep(1000);
+                            }
+                        }
+                        Logger.Info("Record.PollingFileSystemWatcher.OnCreated");
+
                         Thread.Sleep(1000);
                         var recordId = WexflowEngine.SaveRecordFromFile(path, superAdminUsername);
 
