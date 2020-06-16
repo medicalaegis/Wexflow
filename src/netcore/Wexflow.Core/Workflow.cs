@@ -921,6 +921,7 @@ namespace Wexflow.Core
                     , Database
                     , GlobalVariables
                     );
+                workflow.RestVariables = RestVariables;
                 workflow.StartedBy = startedBy;
                 return workflow.StartAsync(startedBy);
             }
