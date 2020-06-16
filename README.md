@@ -13,7 +13,7 @@ Wexflow provides a cross-platform workflow server, a backend for designing, mana
 
 Wexflow provides [100+ activities](https://github.com/aelassas/Wexflow/wiki/Tasks-documentation), supports [10+ database systems](https://github.com/aelassas/Wexflow/wiki/Databases), and allows custom integration with other solutions through [custom activities](https://github.com/aelassas/Wexflow/wiki/Custom-tasks) and [Wexflow API](https://github.com/aelassas/Wexflow/wiki/RESTful-API).
 
-## Features
+## Why Wexflow?
 
 - [Cross-platform server](https://github.com/aelassas/Wexflow/wiki/Workflow-server)
 - [Powerful backend](https://github.com/aelassas/Wexflow/wiki/Usage#backend)
