@@ -29,7 +29,6 @@ Wexflow provides [100+ activities](https://github.com/aelassas/Wexflow/wiki/Task
 - [Real-time stats](https://github.com/aelassas/Wexflow/wiki/Usage#dashboard)
 - [RESTful API](https://github.com/aelassas/Wexflow/wiki/RESTful-API)
 - [Extensible](https://github.com/aelassas/Wexflow/wiki/Extensible)
-- [And much more...](https://github.com/aelassas/Wexflow/wiki)
 
 ## Download
 
