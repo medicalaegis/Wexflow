@@ -15,6 +15,9 @@ Wexflow provides [100+ activities](https://github.com/aelassas/Wexflow/wiki/Task
 
 ## Why Wexflow?
 
+- [Open source](https://github.com/aelassas/Wexflow/wiki/Free-and-open-source)
+- [Easy to install](https://github.com/aelassas/Wexflow/wiki/Installation)
+- [Easy to use](https://github.com/aelassas/Wexflow/wiki/Usage)
 - [Cross-platform server](https://github.com/aelassas/Wexflow/wiki/Workflow-server)
 - [Powerful backend](https://github.com/aelassas/Wexflow/wiki/Usage#backend)
 - [Enhanced designer](https://github.com/aelassas/Wexflow/wiki/Usage#designer)
