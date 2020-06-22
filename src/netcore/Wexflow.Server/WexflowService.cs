@@ -1658,9 +1658,10 @@ namespace Wexflow.Server
                 xif.Add(xdo);
 
                 var xelse = new XElement(xn + "Else");
-                var elseNodes = (JArray)node.SelectToken("ElseNodes");
-                if (elseNodes != null)
+                var elseNodesToken = node.SelectToken("ElseNodes");
+                if (elseNodesToken != null && elseNodesToken.HasValues)
                 {
+                    var elseNodes = (JArray)elseNodesToken;
                     foreach (var elseNode in elseNodes)
                     {
                         var taskId = (int)elseNode.SelectToken("Id");
