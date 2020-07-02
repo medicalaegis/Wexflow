@@ -4,6 +4,7 @@
 [![Build Status](https://aelassas.visualstudio.com/Wexflow/_apis/build/status/aelassas.Wexflow?branchName=master)](https://aelassas.visualstudio.com/Wexflow/_build/latest?definitionId=1&branchName=master)
 [![Downloads](https://img.shields.io/github/downloads/aelassas/Wexflow/total.svg)](https://wexflow.github.io/stats)
 [![Nuget](https://img.shields.io/nuget/v/Wexflow)](https://www.nuget.org/packages/Wexflow)
+[![Gitter](https://badges.gitter.im/Wexflow/Lobby.svg)](https://gitter.im/Wexflow/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 ## What is Wexflow?
 
